@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
+import { EmailComposer } from '@ionic-native/email-composer';
+
 
 @Component({
   selector: 'page-home',
@@ -7,7 +9,22 @@ import { NavController } from 'ionic-angular';
 })
 export class HomePage {
 
-  constructor(public navCtrl: NavController) {
+  recipient: string;
+  subject: string;
+  message: string;
+
+  constructor(public navCtrl: NavController, public emailComposer: EmailComposer) {  }
+
+  send() {
+    let email = {
+      recipient: this.recipient,
+      subject: this.subject,
+      message: this.message,
+      isHtml: false,
+      app: "Gmail"
+    }
+
+    this.emailComposer.open(email);
 
   }
 
